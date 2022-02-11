@@ -7,8 +7,8 @@ class Token(BaseModel):
     token_type: str
 
 
-class TokenData(BaseModel):
-    username: str | None = None
+class TokenPayload(BaseModel):
+    username: str
 
 
 class TokenResponse(BaseModel):

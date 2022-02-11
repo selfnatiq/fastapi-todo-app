@@ -1,6 +1,8 @@
 from pydantic import BaseModel
 from datetime import datetime
 
+from .user import UserResponse
+
 
 class TodoBase(BaseModel):
     todo: str
@@ -18,6 +20,8 @@ class TodoUpdate(TodoBase):
 
 class TodoResponse(TodoBase):
     id: str
+    desc: str
+    user: UserResponse
     updated_at: datetime
     created_at: datetime
 
