@@ -14,8 +14,8 @@ def login(user_data: OAuth2PasswordRequestForm = Depends(),
           db: Session = Depends(deps.get_db)):
     user = users_controller.authenticate(db, user_data.username, user_data.password)
 
-    if not user:
-        raise HTTPException(status=status.HTTP_400_BAD_REQUEST,
+    if user is None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Invalid username or password")
 
     access_token = security.create_access_token({"username": user.username})

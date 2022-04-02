@@ -1,7 +1,7 @@
 from sqlalchemy import asc
 from sqlalchemy.orm import Session
 
-from ..models import todo as todo_model
+from ..models import todo as todo_model, user as user_model
 from ..schemas import todo as todo_schema
 
 
@@ -16,8 +16,8 @@ def get_todos(db: Session, skip: int = 0, limit: int = 20):
         .offset(skip).limit(limit).all()
 
 
-def create_todo(db: Session, todo: todo_schema.TodoCreate):
-    db_todo = todo_model.Todo(**todo.dict())
+def create_todo(db: Session, todo: todo_schema.TodoCreate, user: user_model.User):
+    db_todo = todo_model.Todo(**todo.dict(), user=user)
     db.add(db_todo)
 
     db.commit()
